@@ -25,6 +25,12 @@ public class PedidoController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        Pedido pedido = pedidoService.buscarPedidoPorId(id);
+        return ResponseEntity.ok(pedido);
+    }
+
 
     @PostMapping
     public ResponseEntity criarPedido(@RequestBody Pedido pedido) {
@@ -56,7 +62,7 @@ public class PedidoController {
         }
     }
 
-    @GetMapping("/calcular-imposto")
+    @PostMapping("/calcular-imposto")
     public ResponseEntity<Pedido> calcularImposto(@RequestBody Pedido pedido) {
         Pedido pedidoCalculado = pedidoService.calcularImposto(pedido);
         return ResponseEntity.ok(pedidoCalculado);
